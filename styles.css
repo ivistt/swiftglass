@@ -130,7 +130,7 @@ section {
 }
 
 .hero-content {
-    background-image: url('https://cdn.prod.website-files.com/698e171f77017f515549898f/698e1a8fe1b9eea7af5b543d_image%2019.png');
+    background-image: url('./images/imgi_11_698e1a8fe1b9eea7af5b543d_image 19.png');
     background-size: cover;
     background-position: center;
     border-radius: 2em;
@@ -357,7 +357,7 @@ section {
 
 /* Process Section */
 .process-section {
-    background-image: url('https://cdn.prod.website-files.com/698e171f77017f515549898f/698e40b5ea98776231e399f4_Frame%202087327736.png');
+    background-image: url('./images/imgi_12_698e40b5ea98776231e399f4_Frame 2087327736.png');
     background-size: cover;
     background-position: center;
     border-radius: 2em;
@@ -482,7 +482,7 @@ section {
 
 /* FAQ Section */
 .faq-section {
-    background-image: url('https://cdn.prod.website-files.com/698e171f77017f515549898f/698e46775a8376d38d2f5544_CleanShot%202026-02-11%20at%2013.39.19%402x%201.png');
+    background-image: url('./images/imgi_13_698e46775a8376d38d2f5544_CleanShot 2026-02-11 at 13.39.19@2x 1.png');
     background-size: cover;
     background-position: center;
     border-radius: 2em;
@@ -687,7 +687,6 @@ section {
     .container-hero {
         padding: 0;
         min-height: 100%;
-        width: 100%;
     }
     
     .hero-section {
