@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         breakpoints: {
             640: {
-                slidesPerView: 3.5,
+                slidesPerView: 2.5,
                 spaceBetween: parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.5
             }
         }
