@@ -141,10 +141,12 @@ section {
     position: relative;
     min-height: 90vh;
     justify-content: center;
+    overflow: hidden;
 }
 
 .abs-hero-image{
     position: absolute;
+    object-fit: cover;
     width: 100%;
     height: 100%;
     z-index: -1;
