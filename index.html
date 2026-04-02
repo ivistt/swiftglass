@@ -10,7 +10,35 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .calc-layout {
+            display: flex;
+            align-items: stretch;
+            gap: 40px;
+        }
+        .calc-image-side {
+            flex: 0 0 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calc-side-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1em;
+            object-position: center bottom;
+            filter: drop-shadow(0 0 40px rgba(255,200,0,0.15));
+        }
+        .calc-layout .calc-wrapper {
+            flex: 1;
+            min-width: 0;
+        }
+        @media (max-width: 900px) {
+            .calc-image-side { display: none; }
+        }
+    </style>
 </head>
 <body class="body">
     <!-- Hero Section -->
@@ -41,6 +69,175 @@
                 <img src="./images/698e480ba1c451aa3b142e47_Group 78.svg" class="logo-spin logo-bl" alt="">
                 <img src="./images/698e480ba1c451aa3b142e47_Group 78.svg" class="logo-spin logo-br" alt="">
             </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calc-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Залишайте <span class="highlight">заявку</span></h2>
+                </div>
+                <div class="section-label">Це швидко</div>
+            </div>
+
+            <div class="calc-layout">
+                <div class="calc-image-side">
+                    <img src="images/main.png" alt="" class="calc-side-img">
+                </div>
+                <div class="calc-wrapper">
+                <!-- Steps indicator -->
+                <div class="calc-steps">
+                    <div class="calc-step active" data-step="1">
+                        <span class="step-num">1</span>
+                        <span class="step-name">Контакти</span>
+                    </div>
+                    <div class="calc-step-line"></div>
+                    <div class="calc-step" data-step="2">
+                        <span class="step-num">2</span>
+                        <span class="step-name">Авто</span>
+                    </div>
+                    <div class="calc-step-line"></div>
+                    <div class="calc-step" data-step="3">
+                        <span class="step-num">3</span>
+                        <span class="step-name">Скло</span>
+                    </div>
+                </div>
+
+                <form id="calcForm" class="calc-form" onsubmit="return false;">
+
+                    <!-- Step 1: Contact info -->
+                    <div class="calc-page active" data-page="1">
+                        <p class="calc-page-label">Як з вами зв'язатися?</p>
+                        <div class="calc-fields">
+                            <div class="calc-field">
+                                <label class="calc-label">Ваше ім'я</label>
+                                <input type="text" class="calc-input" id="cName" placeholder="Наприклад: Олексій" autocomplete="off">
+                            </div>
+                            <div class="calc-field">
+                                <label class="calc-label">Номер телефону</label>
+                                <input type="tel" class="calc-input" id="cPhone" placeholder="+38 0__ ___ __ __" autocomplete="off">
+                            </div>
+                            <div class="calc-field">
+                                <label class="calc-label">Зручний спосіб зв'язку</label>
+                                <div class="calc-toggles">
+                                    <label class="calc-toggle">
+                                        <input type="checkbox" id="cViber" value="Viber">
+                                        <span class="toggle-pill">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                                            Viber
+                                        </span>
+                                    </label>
+                                    <label class="calc-toggle">
+                                        <input type="checkbox" id="cTelegram" value="Telegram">
+                                        <span class="toggle-pill">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.46 6.12l-2.52 11.86c-.19.84-.68 1.05-1.38.65l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.08 5.62-5.08c.24-.21-.05-.33-.38-.12L8.1 15.36l-2.92-.91c-.63-.2-.65-.63.14-.93l11.4-4.4c.52-.19.99.13.74.97z"/></svg>
+                                            Telegram
+                                        </span>
+                                    </label>
+                                    <label class="calc-toggle">
+                                        <input type="checkbox" id="cCall" value="Дзвінок">
+                                        <span class="toggle-pill">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+                                            Дзвінок
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calc-nav">
+                            <button class="calc-btn-next" onclick="calcNext(1)">
+                                Далі — Авто
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Car info -->
+                    <div class="calc-page" data-page="2">
+                        <p class="calc-page-label">Дані про автомобіль</p>
+                        <div class="calc-fields">
+                            <div class="calc-fields-row">
+                                <div class="calc-field">
+                                    <label class="calc-label">Марка авто</label>
+                                    <input type="text" class="calc-input" id="cMake" placeholder="Наприклад: Toyota" autocomplete="off">
+                                </div>
+                                <div class="calc-field">
+                                    <label class="calc-label">Модель авто</label>
+                                    <input type="text" class="calc-input" id="cModel" placeholder="Наприклад: Camry" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="calc-fields-row">
+                                <div class="calc-field">
+                                    <label class="calc-label">Тип кузова</label>
+                                    <input type="text" class="calc-input" id="cBody" placeholder="Наприклад: Седан" autocomplete="off">
+                                </div>
+                                <div class="calc-field">
+                                    <label class="calc-label">Рік випуску</label>
+                                    <input type="text" class="calc-input" id="cYear" placeholder="Наприклад: 2019" autocomplete="off" maxlength="4">
+                                </div>
+                            </div>
+                            <div class="calc-field">
+                                <label class="calc-label">VIN-код <span class="calc-optional">(необов'язково)</span></label>
+                                <input type="text" class="calc-input calc-input-mono" id="cVin" placeholder="Наприклад: WVWZZZ1KZ8W063142" autocomplete="off" maxlength="17" style="text-transform:uppercase;">
+                            </div>
+                        </div>
+                        <div class="calc-nav">
+                            <button class="calc-btn-back" onclick="calcBack(2)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                Назад
+                            </button>
+                            <button class="calc-btn-next" onclick="calcNext(2)">
+                                Далі — Скло
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Photo + send -->
+                    <div class="calc-page" data-page="3">
+                        <p class="calc-page-label">Фото пошкодження</p>
+                        <div class="calc-fields">
+                            <div class="calc-field">
+                                <label class="calc-label">Прикріпіть фото скла <span class="calc-optional">(необов'язково)</span></label>
+                                <label class="calc-upload" id="uploadZone">
+                                    <input type="file" id="cPhoto" accept="image/*" multiple style="display:none;" onchange="handlePhotoUpload(this)">
+                                    <div class="upload-inner" id="uploadInner">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                        <p>Натисніть або перетягніть фото сюди</p>
+                                        <span>JPG, PNG, WEBP — до 10 МБ кожне</span>
+                                    </div>
+                                    <div class="upload-previews" id="uploadPreviews"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="calc-summary" id="calcSummary"></div>
+                        <div class="calc-nav">
+                            <button class="calc-btn-back" onclick="calcBack(3)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                Назад
+                            </button>
+                            <button class="calc-btn-submit" id="submitBtn" onclick="submitCalc()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                                Надіслати заявку
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Success state -->
+                    <div class="calc-page calc-success" data-page="4">
+                        <div class="success-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h3>Заявку надіслано!</h3>
+                        <p>Ми зв'яжемося з вами найближчим часом.<br>Дякуємо за звернення до SwiftGlass.</p>
+                        <button class="calc-btn-next" onclick="calcReset()" style="margin-top:1em;">Нова заявка</button>
+                    </div>
+
+                </form>
+            </div><!-- /.calc-wrapper -->
+            </div><!-- /.calc-layout -->
         </div>
     </section>
 
@@ -108,27 +305,23 @@
             </div>
             <div class="section-label">Відео з місця</div>
         </div>
+    </div>
 
-        <div class="videos-grid">
-            <div class="video-card">
-                <video src="videos/1.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="video-card">
-                <video src="videos/2.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="video-card">
-                <video src="videos/3.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="video-card">
-                <video src="videos/4.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="video-card">
-                <video src="videos/5.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="video-card">
-                <video src="videos/6.mp4" autoplay muted loop playsinline></video>
+    <!-- Slider виходить за межі container навмисно -->
+    <div class="videos-slider-wrap">
+        <div class="swiper videos-swiper">
+            <div class="swiper-wrapper" id="videoSwiperWrapper">
+                <!-- Слайди генеруються з videos/manifest.json -->
             </div>
         </div>
+
+        <!-- Кнопки навігації -->
+        <button class="videos-btn videos-btn-prev" aria-label="Назад">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="videos-btn videos-btn-next" aria-label="Вперед">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
     </div>
 </section>
 
@@ -485,6 +678,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     
     <!-- Custom JS -->
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
