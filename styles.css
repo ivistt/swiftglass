@@ -613,6 +613,12 @@ section {
     height: 1.5em;
 }
 
+/* Videos Section */
+.videos-section {
+    padding-bottom: 4em;
+    overflow: hidden;
+}
+
 /* Responsive Design */
 @media (max-width: 991px) {
     .services-grid,
