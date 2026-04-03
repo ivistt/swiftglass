@@ -191,8 +191,8 @@ let calcPhotos = []; // зберігаємо File objects
 function calcNext(currentPage) {
     if (!calcValidatePage(currentPage)) return;
 
-    if (currentPage === 2) {
-        buildSummary();
+    if (currentPage === 1) {
+        // no summary needed here
     }
 
     const pages = document.querySelectorAll('.calc-page');
@@ -232,6 +232,16 @@ function calcValidatePage(page) {
     document.querySelectorAll('.calc-input.error').forEach(e => e.classList.remove('error'));
 
     if (page === 1) {
+        const make  = document.getElementById('cMake');
+        const model = document.getElementById('cModel');
+        const year  = document.getElementById('cYear');
+
+        if (!make.value.trim()) { showFieldError(make, 'Введіть марку авто'); valid = false; }
+        if (!model.value.trim()) { showFieldError(model, 'Введіть модель авто'); valid = false; }
+        if (!year.value.trim()) { showFieldError(year, 'Введіть рік'); valid = false; }
+    }
+
+    if (page === 2) {
         const name  = document.getElementById('cName');
         const phone = document.getElementById('cPhone');
 
@@ -243,16 +253,6 @@ function calcValidatePage(page) {
             showFieldError(phone, 'Введіть номер телефону');
             valid = false;
         }
-    }
-
-    if (page === 2) {
-        const make  = document.getElementById('cMake');
-        const model = document.getElementById('cModel');
-        const year  = document.getElementById('cYear');
-
-        if (!make.value.trim()) { showFieldError(make, 'Введіть марку авто'); valid = false; }
-        if (!model.value.trim()) { showFieldError(model, 'Введіть модель авто'); valid = false; }
-        if (!year.value.trim()) { showFieldError(year, 'Введіть рік'); valid = false; }
     }
 
     return valid;
@@ -318,13 +318,13 @@ function buildSummary() {
     ].filter(Boolean).join(', ') || '—';
 
     const rows = [
-        ['Ім\'я',      document.getElementById('cName').value],
-        ['Телефон',    document.getElementById('cPhone').value],
-        ['Зв\'язок',   contacts],
         ['Авто',       `${document.getElementById('cMake').value} ${document.getElementById('cModel').value}`],
         ['Тип кузова', document.getElementById('cBody').value || '—'],
         ['Рік',        document.getElementById('cYear').value],
         ['VIN',        document.getElementById('cVin').value || '—'],
+        ['Ім\'я',      document.getElementById('cName').value],
+        ['Телефон',    document.getElementById('cPhone').value],
+        ['Зв\'язок',   contacts],
     ];
 
     summary.innerHTML = rows.map(([k, v]) =>
@@ -334,6 +334,8 @@ function buildSummary() {
 }
 
 async function submitCalc() {
+    if (!calcValidatePage(2)) return;
+    buildSummary();
     const btn = document.getElementById('submitBtn');
     btn.classList.add('loading');
     btn.innerHTML = 'Відправка...';
@@ -374,7 +376,7 @@ async function submitCalc() {
 
         // 3. Показуємо успіх
         document.querySelectorAll('.calc-page').forEach(p => p.classList.remove('active'));
-        document.querySelector('.calc-page[data-page="4"]').classList.add('active');
+        document.querySelector('.calc-page[data-page="3"]').classList.add('active');
         document.querySelector('.calc-steps').style.display = 'none';
 
     } catch (err) {
