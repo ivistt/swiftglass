@@ -40,6 +40,23 @@
         @media (max-width: 900px) {
             .calc-image-side { display: none; }
         }
+        .btn-google-maps {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75em 1.5em;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 2em;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .btn-google-maps:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
     </style>
 </head>
 <body class="body">
@@ -451,55 +468,109 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"Розбив скло в суботу вранці, думав вихідні пропали. Хлопці приїхали через годину, за 40 хвилин все поміняли. Ціна адекватна, робота чиста."</p>
-                            <p class="review-author">Олександр, Toyota Camry</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Не перший раз рятують, приїжджають швидко прямо в гараж."</p>
+                            <p class="review-author">Іван Ключевський</p>
                         </div>
                     </div>
-                    
+
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"Працюємо з SwiftGlass вже 3 роки. Надійні партнери для нашого СТО — завжди вчасно, якісно, без косяків."</p>
-                            <p class="review-author">Віктор, СТО "Автомайстер"</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Швидко, якісно та надійно. Ні краплі розчарування."</p>
+                            <p class="review-author">Кирило Снігур</p>
                         </div>
                     </div>
-                    
+
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"Міняли лобове на Porsche. Переживав, але хлопці — професіонали. Все зробили акуратно, електроніка працює, скло ідеально село."</p>
-                            <p class="review-author">Дмитро, Porsche Cayenne</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Переклеювали тут скло після неякісної роботи в іншому сервісі (почало підтікати після дощу). Хлопці оперативно все переробили, тепер в машині сухо і тихо. Велике дякую за якісний сервіс!"</p>
+                            <p class="review-author">Mikhail</p>
                         </div>
                     </div>
-                    
+
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"Тріщина пішла прямо в дорозі. Подзвонив, пояснили що робити, приїхали на парковку біля офісу. Поки я нараду закінчував — вони вже все поміняли. Взагалі не відвертався від роботи."</p>
-                            <p class="review-author">Сергій, Volkswagen Passat</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Круті хлопці. Міняв у них скло на автомобілі. Зробили швидко, якісно. РЕКОМЕНДУЮ!!!"</p>
+                            <p class="review-author">Олександр Непомилов</p>
                         </div>
                     </div>
-                    
+
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"Замовляла заміну заднього скла на мікроавтобус. Дуже переживала за обігрів і камеру. Майстер все підключив, протестував при мені — працює як нове. Дякую за професіоналізм!"</p>
-                            <p class="review-author">Олена, Mercedes Vito</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Звернулась за консультацією, через 3 години робота була готова виконана під ключ. Майстри кваліфіковані, порадили що і як краще зробити. З цього моменту, при будь-яких питаннях тільки Swiftglass ❤️"</p>
+                            <p class="review-author">Даріетта Бурлака</p>
                         </div>
                     </div>
-                    
+
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"У нас автопарк з 12 машин. Коли потрібна заміна — дзвоню цим хлопцям. Приїжджають швидко, роблять якісно, ціни чесні. Для бізнесу це важливо — ніяких простоїв."</p>
-                            <p class="review-author">Андрій, транспортна компанія "Логіст-Юг"</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Швидка та якісна робота, приємні співробітники, особливо Рома та Женя."</p>
+                            <p class="review-author">Рома Гамурар</p>
                         </div>
                     </div>
-                    
+
                     <div class="swiper-slide">
                         <div class="review-card">
-                            <p class="review-text">"Скол перетворився на тріщину через все скло. Думав дорого вийде, але хлопці підібрали якісний аналог за розумною ціною. Приїхали додому, поміняли за годину. Тепер всім рекомендую."</p>
-                            <p class="review-author">Ігор, Ford Focus</p>
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Афігенно зробили, дуже задоволений, хороші хлопці працюють, майстри своєї справи, рекомендую 👍👍👍"</p>
+                            <p class="review-author">Viktor Черноморець</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Задоволена компанією, оперативно спрацювали 👍🏻 Швидко, чисто, і головне без проблем!"</p>
+                            <p class="review-author">Анастасія Ткаченко</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Швидко та оперативно, будь-яку проблему вирішать. Всім раджу."</p>
+                            <p class="review-author">Настя Кіртока</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Швидко та якісно замінили лобове скло на моєму Ford Focus 2013. Роботу виконали акуратно, все стало ідеально, без зазорів або шуму під час їзди. Персонал ввічливий, сервісом повністю задоволений. Рекомендую!"</p>
+                            <p class="review-author">Kyrylo Sotnykov</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Дуже задоволена роботою. Замінили автоскло швидко та якісно. Майстри ввічливі, все пояснили та дали рекомендації. Однозначно рекомендую)"</p>
+                            <p class="review-author">Іра Волочан</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="review-text">"Хлопці приїхали на паркінг і замінили скло на моєму Mercedes менш ніж за 1 годину, дуже якісно, швидко, надійно! Сервіс 👍"</p>
+                            <p class="review-author">Іван Молодець</p>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <div class="buttons centered" style="margin-top: 2em;">
+                <a href="https://share.google/aJqEKYgIZBr59ot2q" target="_blank" rel="noopener" class="btn-google-maps">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                    Переглянути всі відгуки в Google Maps
+                </a>
+            </div>
+
             <div class="buttons centered">
                 <a href="viber://add?number=380668187645" class="btn-telegram">
                     <img src="./images/viber-ico.svg" alt="Viber">
