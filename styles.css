@@ -37,6 +37,21 @@
     box-sizing: border-box;
 }
 
+.imagewrapper {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.img-w {
+    width: 100%;     
+    height: auto;    
+    display: block;   
+    flex-shrink: 1;
+    min-width: 0;
+    border-radius: 1em;
+}
+
 .body {
     font-family: 'InterTight', Arial, sans-serif;
     background-color: var(--black);
