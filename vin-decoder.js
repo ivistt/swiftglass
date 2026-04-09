@@ -84,41 +84,57 @@ const nhtsaCache = {
 };
 
 // Об'єднуємо NHTSA-марки з локальними (видаляємо дублікати)
+// Спочатку повертаємо локальні одразу, NHTSA підвантажуємо у фоні
 async function loadAllMakes() {
     if (nhtsaCache.makes) return nhtsaCache.makes;
-    let nhtsa = [];
-    try {
-        const res  = await fetch('https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json');
-        const data = await res.json();
-        nhtsa = data.Results.map(r => r.Make_Name);
-    } catch { /* мережева помилка — продовжуємо без NHTSA */ }
 
-    const seen = new Set(ALL_LOCAL_MAKES.map(m => m.toLowerCase()));
-    const extra = nhtsa.filter(m => !seen.has(m.toLowerCase()));
-    nhtsaCache.makes = [...ALL_LOCAL_MAKES, ...extra].sort((a, b) => a.localeCompare(b));
+    // Одразу повертаємо локальні марки — без очікування NHTSA
+    nhtsaCache.makes = ALL_LOCAL_MAKES;
+
+    // Фонове збагачення NHTSA (не блокуємо UI)
+    (async () => {
+        try {
+            const res  = await fetch('https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json');
+            const data = await res.json();
+            const nhtsa = data.Results.map(r => r.Make_Name);
+            const seen = new Set(nhtsaCache.makes.map(m => m.toLowerCase()));
+            const extra = nhtsa.filter(m => !seen.has(m.toLowerCase()));
+            if (extra.length > 0) {
+                nhtsaCache.makes = [...nhtsaCache.makes, ...extra].sort((a, b) => a.localeCompare(b));
+            }
+        } catch { /* мережева помилка — залишаємо локальні */ }
+    })();
+
     return nhtsaCache.makes;
 }
 
-// Завантажуємо моделі: спочатку локальні, потім доповнюємо NHTSA
+// Завантажуємо моделі: спочатку локальні одразу, NHTSA у фоні
 async function loadModels(make) {
     const key = make.toLowerCase();
     if (nhtsaCache.models[key]) return nhtsaCache.models[key];
 
     const localEntry = LOCAL_MAKES_LOWER[key];
-    const localModels = localEntry ? localEntry.models : [];
+    const localModels = localEntry ? localEntry.models.slice() : [];
 
-    let nhtsaModels = [];
-    try {
-        const res  = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/${encodeURIComponent(make)}?format=json`);
-        const data = await res.json();
-        nhtsaModels = data.Results.map(r => r.Model_Name);
-    } catch { /* продовжуємо без NHTSA */ }
+    // Одразу повертаємо локальні
+    nhtsaCache.models[key] = localModels.length > 0
+        ? localModels.sort((a, b) => a.localeCompare(b))
+        : [];
 
-    const seen = new Set(localModels.map(m => m.toLowerCase()));
-    const extra = nhtsaModels.filter(m => !seen.has(m.toLowerCase()));
-    const merged = [...localModels, ...extra].sort((a, b) => a.localeCompare(b));
+    // Фонове збагачення NHTSA
+    ;(async () => {
+        try {
+            const res  = await fetch('https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/' + encodeURIComponent(make) + '?format=json');
+            const data = await res.json();
+            const nhtsaModels = data.Results.map(r => r.Model_Name);
+            const seen = new Set(nhtsaCache.models[key].map(m => m.toLowerCase()));
+            const extra = nhtsaModels.filter(m => !seen.has(m.toLowerCase()));
+            if (extra.length > 0) {
+                nhtsaCache.models[key] = [...nhtsaCache.models[key], ...extra].sort((a, b) => a.localeCompare(b));
+            }
+        } catch { /* продовжуємо без NHTSA */ }
+    })();
 
-    nhtsaCache.models[key] = merged.length > 0 ? merged : localModels;
     return nhtsaCache.models[key];
 }
 
@@ -209,7 +225,10 @@ function initAutocomplete(inputId, getItems, onSelect) {
         renderDropdown(filterList(items, input.value));
     });
 
-    input.addEventListener('input', () => {
+    input.addEventListener('input', async () => {
+        if (allItems.length === 0) {
+            allItems = await getItems(input.value);
+        }
         if (!isOpen && allItems.length) {
             dropdown.classList.add('open');
             isOpen = true;
